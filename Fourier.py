@@ -6,8 +6,8 @@ signal=np.genfromtxt("signal.dat",delimiter=",")
 incompletos=np.genfromtxt("incompletos.dat",delimiter=",")
 
 #--------------------- Punto 3.2----------------------------#
-x=signal[1:,0]
-y=signal[1:,1]
+x=signal[:,0]
+y=signal[:,1]
 #print y
 
 plt.figure()
@@ -22,17 +22,21 @@ dt=y[2]-y[1]
 transformada=np.array([])
 
 #Implementacion de la transformada de fourier
+
+G=np.zeros((N,1), dtype=complex)
 for n in range(1,N+1):
 	for k in range(0,N-1):	
-		G=np.sum(y[k]*np.exp(-1j*2*np.pi*k*(float(n)/N)))
-		transformada=np.append(transformada, G)
-print len(transformada)
-	
+		G[k]=np.sum(y[k]*np.exp(-1j*2*np.pi*k*(float(n))/N))
+
+print G
 
 
 #Lo siguiente es para verificar que su codigo este bien:
 from scipy.fftpack import fft, fftfreq
-fft_x = fft(y) / N # FFT Normalized
+fft_x = fft(y)/N  # FFT Normalized
 freq = fftfreq(N, dt) # Recuperamos las frecuencias
 print len(fft_x)
 
+plt.figure()
+plt.plot(freq, G)
+plt.savefig("CuadradoLiliana_TF.pdf")
