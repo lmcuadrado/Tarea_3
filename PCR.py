@@ -1,6 +1,6 @@
 import numpy as np
 import heapq
-#import matplotlib.pylab as plt
+import matplotlib.pylab as plt
 
 #------------ Punto 2.1 --------------#
 #Almaceno los datos
@@ -61,19 +61,31 @@ for i in max_parame1:
 
 print "los parametros mas importantes en base a los autovector son los correspondientes a las columnas:", maximos[0], "y", maximos[1]
 	
+#------------ Punto 2.5 --------------#
+vectores=np.array([vec1,vec2])
+
+proyeccion=np.dot(datos, vectores.T)
+
+x_verdes=[]
+y_verdes=[]
+x_rojos=[]
+y_rojos=[]
+
+for i in range(len(daticos)):
+	if daticos[i]==0:
+		x_verdes.append(proyeccion[i,0])
+		y_verdes.append(proyeccion[i,1])
+	else:
+		x_rojos.append(proyeccion[i,0])
+		y_rojos.append(proyeccion[i,1])
+		
 
 
 
-
-
-
-
-
-
-
-
-
-
+plt.figure()
+plt.scatter(x_verdes,y_verdes, color="green")
+plt.scatter(x_rojos,y_rojos, color="blue")
+plt.savefig("CuadradoLiliana_PCA.pdf")
 
 
 
