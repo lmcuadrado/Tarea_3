@@ -58,7 +58,7 @@ def pasabajas(freq,fft_x,fc):
 			filtro[i].append(0)
 	return filtro
 			
-filtro=pasabajas(freq)
+filtro=pasabajas(freq,fft_x,fc)
 
 plt.figure()
 plt.plot(filtro)
@@ -107,13 +107,43 @@ fc1=500
 fc1_signal= pasabajas(freq,fft_x,fc1) #pasabajas aplicado a signal con frecuencia de corte igual a 500
 
 fc1_quadratic= pasabajas(freq,fft_quadratic,fc1) #pasabajas aplicado a quadratic con frecuencia de corte igual a 500
+fc_quadratic= pasabajas(freq,fft_quadratic,fc) #pasabajas aplicado a signal con frecuencia de corte igual a 1000
 
+fc1_cubic= pasabajas(freq,fft_cubic,fc1) #pasabajas aplicado a cubic con frecuencia de corte igual a 500
+fc_cubic= pasabajas(freq,fft_cubic,fc) #pasabajas aplicado a cubic con frecuencia de corte igual a 1000
 
+#--------------------- Punto 3.12 ----------------------------#
 
+plt.figure(figsize=(12,8))
 
+plt.subplot(3,2,1)
+plt.plot(fc1_signal)
+plt.title("signal_fc=500")
 
+plt.subplot(3,2,2)
+plt.plot(filtro)
+plt.title("signal_fc=1000")
 
+plt.subplot(3,2,3)
+plt.plot(fc1_quadratic)
+plt.title("quadratic_fc=500")
 
+plt.subplot(3,2,4)
+plt.plot(fc_quadratic)
+plt.title("quadratic_fc=1000")
+
+plt.subplot(3,2,5)
+plt.plot(fc1_cubic)
+plt.title("cubic_fc=500")
+
+plt.subplot(3,2,6)
+plt.plot(fc_cubic)
+plt.title("cubic_fc=1000")
+
+plt.subplots_adjust(hspace=.5) 
+
+#plt.show()
+plt.savefig("CuadradoLiliana_2Filtros.pdf")
 
 
 
