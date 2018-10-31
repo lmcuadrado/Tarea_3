@@ -49,11 +49,11 @@ fc=1000
 #fft_x[abs(freq) < fc] = 0
 
 def pasabajas(freq):
-	#filtro=[]
+	filtro=[]
 	for i in range(0,len(freq)):
 		if freq[i]>fc:
-			fft_x[i]=0
-	return fft_x
+			filtro[i].append(0)
+	return filtro
 			
 filtro=pasabajas(freq)
 
@@ -62,13 +62,10 @@ plt.plot(filtro)
 plt.savefig("CuadradoLiliana_filtrada.pdf")
 #plt.show()
 
+#--------------------- Punto 3.7 ----------------------------#
 
-
-
-
-
-
-
+print "No se puede hacer la transformada de fourier en incompletos"
+print fft(incompletos[:,1])/N
 
 
 

@@ -65,6 +65,8 @@ print "los parametros mas importantes en base a los autovector son los correspon
 vectores=np.array([vec1,vec2])
 
 proyeccion=np.dot(datos, vectores.T)
+PC1=proyeccion[:,0]
+PC2=proyeccion[:,1]
 
 x_verdes=[]
 y_verdes=[]
@@ -80,12 +82,15 @@ for i in range(len(daticos)):
 		y_rojos.append(proyeccion[i,1])
 		
 
-
-
 plt.figure()
 plt.scatter(x_verdes,y_verdes, color="green")
 plt.scatter(x_rojos,y_rojos, color="blue")
 plt.savefig("CuadradoLiliana_PCA.pdf")
+
+#plt.figure()
+#plt.scatter(PC1[daticos==1],PC2[daticos==1], color="red")
+#plt.scatter(PC1[daticos==0],PC1[daticos==0], color="blue")
+#plt.savefig("CuadradoLiliana_PCA.pdf")
 
 
 
