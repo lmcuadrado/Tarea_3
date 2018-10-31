@@ -49,7 +49,8 @@ plt.savefig("CuadradoLiliana_TF.pdf")
 
 #--------------------- Punto 3.6 ----------------------------#
 
-fc=1000
+fc=1000 
+inverse=np.fft.ifft(y)
 
 def pasabajas(freq,fft_x,fc):
 	filtro=fft_x
@@ -58,7 +59,7 @@ def pasabajas(freq,fft_x,fc):
 			filtro[i].append(0)
 	return filtro
 			
-filtro=pasabajas(freq,fft_x,fc)
+filtro=pasabajas(freq,inverse,fc)
 
 plt.figure()
 plt.plot(filtro)
@@ -144,8 +145,4 @@ plt.subplots_adjust(hspace=.5)
 
 #plt.show()
 plt.savefig("CuadradoLiliana_2Filtros.pdf")
-
-
-
-
 
