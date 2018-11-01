@@ -30,13 +30,11 @@ for n in range(1,N+1):
 	for k in range(0,N-1):	
 		G[k]=np.sum(y[k]*np.exp(-1j*2*np.pi*k*(float(n))/N))
 
-#print len(G)
-
 
 #--------------------- Punto 3.4 ----------------------------#
 
 from scipy.fftpack import fft, fftfreq
-fft_x = fft(y)/N  # FFT Normalized
+fft_x = fft(y)/N  # FFT 
 freq = fftfreq(N, dt) # Recuperamos las frecuencias
 
 plt.figure()
@@ -45,7 +43,7 @@ plt.savefig("CuadradoLiliana_TF.pdf")
 
 #--------------------- Punto 3.5 ----------------------------#
 
-#print "Analizando la grafica nos dan 0.014112 y 0.038141"
+print "Analizando la grafica nos dan 0.014112 y 0.038141"
 
 #--------------------- Punto 3.6 ----------------------------#
 
@@ -64,13 +62,11 @@ filtro=pasabajas(freq,inverse,fc)
 plt.figure()
 plt.plot(filtro)
 plt.savefig("CuadradoLiliana_filtrada.pdf")
-#plt.show()
+
 
 #--------------------- Punto 3.7 ----------------------------#
 
-print "No se puede hacer la transformada de fourier en incompletos"
-fft_incompletos = fft(y1)/517  # FFT Normalized
-#print fft(incompletos[:,1])/N
+print "No se puede hacer la transformada de fourier en incompletos porque el numero de datos debe ser una potencia de dos. Incompletos tiene una longitud de 117, por eso interpolaremos los datos 512"
 
 #--------------------- Punto 3.8 ----------------------------#
 puntos=np.linspace(min(x1),max(x1),512)
@@ -94,12 +90,11 @@ plt.title("cubic")
 plt.subplot(2,2,3)
 plt.plot(freq, abs(fft_quadratic))
 plt.title("quadratic")
-#plt.show()
 plt.savefig("CuadradoLiliana_TF_interpola.pdf")
 
 #--------------------- Punto 3.10 ----------------------------#
 
-print "Las diferencias son..."
+print "Las graficas de interpolaciones tienen mas ruido "
 
 #--------------------- Punto 3.11 ----------------------------#
  
@@ -143,6 +138,6 @@ plt.title("cubic_fc=1000")
 
 plt.subplots_adjust(hspace=.5) 
 
-#plt.show()
+
 plt.savefig("CuadradoLiliana_2Filtros.pdf")
 
