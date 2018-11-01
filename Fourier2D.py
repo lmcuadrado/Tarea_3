@@ -23,9 +23,10 @@ def filtro(freq, ft):
 				ft[i,j]=0.0
 	return ft
 
-#plt.figure()
-#plt.plot(img_freq, filtro(img_freq, img_ft))
-#plt.show()
+plt.figure()
+plt.plot(img_freq, filtro(img_freq, img_ft))
+plt.savefig("CuadradoLiliana_FT2D_filtrada.pdf")
+
 
 #---------------- Punto 4.4 -----------------#
 img_ftinversa = np.fft.ifft2(image)		#inversa
