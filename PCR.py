@@ -7,6 +7,7 @@ import matplotlib.pylab as plt
 datos = (np.genfromtxt("WDBC.dat",delimiter=","))[:,1:]
 
 daticos= (np.genfromtxt("WDBC.dat",delimiter=",", dtype=str))[:,1]
+
 for i in range(len(daticos)):
 	if daticos[i]=="M":
 		daticos[i]=1.	#El valor 1 corresponde a tumores malignos
@@ -31,11 +32,11 @@ def MatCovarianza(a):
 cov=MatCovarianza(datos)
 eigval,eigvec=np.linalg.eig(cov)
 
-#print eigval
+print cov
 
 #------------ Punto 2.3 --------------#
-#for i in range(len(eigval)):
-	#print "autovector",i+1,":", eigvec[:,i], "autovalor",i+1,":", eigval[i]
+for i in range(len(eigval)):
+	print "autovector",i+1,":", eigvec[:,i], "autovalor",i+1,":", eigval[i]
 
 
 #------------ Punto 2.4 --------------#
@@ -64,9 +65,9 @@ print "los parametros mas importantes en base a los autovector son los correspon
 #------------ Punto 2.5 --------------#
 vectores=np.array([vec1,vec2])
 
-proyeccion=np.dot(datos, vectores.T)
-PC1=proyeccion[:,0]
-PC2=proyeccion[:,1]
+proyeccion=np.dot(vectores, np.transpose(datos))
+PC1=proyeccion[0,:]
+PC2=proyeccion[1,:]
 
 x_verdes=[]
 y_verdes=[]
@@ -74,23 +75,29 @@ x_rojos=[]
 y_rojos=[]
 
 for i in range(len(daticos)):
-	if daticos[i]==0:
-		x_verdes.append(proyeccion[i,0])
-		y_verdes.append(proyeccion[i,1])
+	if daticos[i]=="0.0":
+		x_verdes.append(PC1[i])
+		y_verdes.append(PC2[i])
 	else:
-		x_rojos.append(proyeccion[i,0])
-		y_rojos.append(proyeccion[i,1])
+		x_rojos.append(PC1[i])
+		y_rojos.append(PC2[i])
 		
 
 plt.figure()
-plt.scatter(x_verdes,y_verdes, color="green")
-plt.scatter(x_rojos,y_rojos, color="blue")
+plt.scatter(x_verdes,y_verdes, color="green", label="Benigno")
+plt.scatter(x_rojos,y_rojos, color="red", label="Maligno")
+plt.legend()
 plt.savefig("CuadradoLiliana_PCA.pdf")
 
-#plt.figure()
-#plt.scatter(PC1[daticos==1],PC2[daticos==1], color="red")
-#plt.scatter(PC1[daticos==0],PC1[daticos==0], color="blue")
-#plt.savefig("CuadradoLiliana_PCA.pdf")
+
+
+
+
+
+
+
+
+
 
 
 
